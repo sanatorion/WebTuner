@@ -11,6 +11,7 @@ header{
 
 main{
     margin-left: 26px;
+    margin-right: 26px;
     line-height: 0.5;
 }
 
@@ -27,11 +28,17 @@ button{
     padding: 5px 15px;
     gap: 8px;
     transition: all 0.2s linear;
+    cursor: pointer;
 }
 
 button:hover{
     background-color: #3e3e3e;
     transition: all 0.2s linear;
+}
+
+::selection {
+    background-color: #74F398;
+    color: #232323;
 }
 
 #tuner-type-label{
@@ -47,7 +54,12 @@ button:hover{
 
 .content-header{
     display: flex;
-    gap: 10px;
+    gap: 14px;
+    margin-top: 20px;
+    align-items: center;
+}
+
+.content-header-tuned{
     margin-top: 20px;
     align-items: center;
 }
@@ -102,7 +114,7 @@ h2{
     display: flex;
     flex-direction: column;
     gap: 10px;
-    
+    width: 210px;
 }
 
 .link-icon{
@@ -134,6 +146,9 @@ a:hover{
     gap: 10px;
     pointer-events: none;
 }
+.tuner-container input, .tuner-container button{
+    pointer-events: auto;
+}
 .axis-line{
     margin-left: auto;
     margin-right: auto;
@@ -152,7 +167,6 @@ a:hover{
     display: flex;
     align-items: center;
     justify-content: center;
-    
 }
 .vertical-axis-line{
     margin-left: auto;
@@ -182,6 +196,7 @@ a:hover{
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 20px;
 }
 
 .tuner-content-text, #frequency-label{
@@ -193,4 +208,103 @@ a:hover{
 #frequency-label{
     color: #74F398;
     font-size: 22px;
+}
+
+.tuned-freq-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.note-box-container{
+    display: flex;
+    gap:28px;
+}
+.note{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap:3px
+}
+.note-box{
+    width: 41px;
+    height: 41px;
+    border-radius: 50%;
+    background-color: #232323;
+    border: 2px solid;
+    border-color: #3e3e3e;
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+    color: #919191;
+    outline: none;
+    transition: all 0.2s linear;
+}
+
+.note-box:hover, .note-box.active{
+    border-color: #dddddd;
+    color: #dddddd;
+}
+
+.arrow-btn{
+    display: flex; /* 'none' to disable */
+    background: none;
+    border: none;
+    width: 20px;
+    padding:0px;
+    align-items: center;
+    justify-content: center;
+    color: #3e3e3e;
+}
+.arrow-btn:hover{
+    background: none;
+    color: #dddddd;
+}
+
+.toggle-container{
+    display: inline-flex;
+    cursor: pointer;
+    align-items: center;
+    gap: 12px;
+}
+.toggle-container input{
+    display: none;
+}
+.toggle-slider {
+    position: relative;
+    width: 40px;
+    height: 12px;
+    background-color: #74F398;
+    border-radius: 20px;
+    transition: background-color 0.2s ease;
+}
+.toggle-slider::before {
+    content: "";
+    position: absolute;
+    top: -8px;
+    left: -2px;
+    width: 20px;
+    height: 20px;
+    background-color: #dddddd;
+    border: 4px solid;
+    border-color: #1d1d1d;
+    border-radius: 50%;
+    transition: transform 0.2s ease;
+}
+.toggle-container input:not(:checked) + .toggle-slider {
+    background-color: #333333;
+}
+.toggle-container input:checked + .toggle-slider::before {
+    transform: translateX(20px);
+}
+.toggle-label{
+    color: #74F398;
+    font-weight: 700;
+    font-size: 18px;
+    transition: all 0.2s linear;
+}
+.toggle-container:has(input:not(:checked)) .toggle-label {
+   color: #dddddd;
+   transition: all 0.2s linear;
 }
