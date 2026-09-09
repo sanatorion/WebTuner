@@ -18,6 +18,27 @@ p{
     line-height: 1.5;
 }
 
+button{
+    display: flex;
+    background-color: #232323;
+    border: 2px solid #3e3e3e;
+    border-radius: 50px;
+    align-items: center;
+    padding: 5px 15px;
+    gap: 8px;
+    transition: all 0.2s linear;
+}
+
+button:hover{
+    background-color: #3e3e3e;
+    transition: all 0.2s linear;
+}
+
+#tuner-type-label{
+    color: #dddddd;
+    font-size: 18px;
+}
+
 #header-logo{
     display: block;
     margin-left: auto;
@@ -31,7 +52,7 @@ p{
     align-items: center;
 }
 
-.content-title, p{
+.content-title, p, #tuner-type-btn{
     color:#dddddd
 }
 
@@ -52,9 +73,21 @@ h2{
     gap: 15px;
 }
 
-.corner-nav-icon{
+.corner-nav-icon, .corner-nav-title{
     width: 25px;
-    color: #919191
+    font-size: 12px;
+    color: #919191;
+    transition: all 0.2s linear;
+}
+
+.corner-nav-icon:hover{
+    color: #dddddd;
+    transition: all 0.2s linear;
+}
+
+/* Corner Navigation Titles are hidden by default. kinda distracting to keep it enabled, kept it here to have an option for now */
+.corner-nav-title{
+    display: none;
 }
 
 .corner-nav-active{
@@ -72,15 +105,92 @@ h2{
     
 }
 
+.link-icon{
+    height: 25px;
+    width: 25px;
+}
+
 a{
+    display: flex;
+    align-items: center;
     text-decoration: none;
     color: #dddddd;
+    gap: 10px;
 
-    transition: all 0.3s ease-in-out;
+    transition: all 0.2s linear;
 }
 
 a:hover{
     color: #74F398;
+    transition: all 0.2s linear;
+}
 
-    transition: all 0.3s ease;
+.tuner-container{
+    position: absolute;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    pointer-events: none;
+}
+.axis-line{
+    margin-left: auto;
+    margin-right: auto;
+    width: 35vw;
+    min-width: 400px;
+}
+.horizontal-axis-line
+{   
+    width: 35vw;
+    height: 2px;
+    background-color: #919191;
+    border-radius: 5px;
+    min-width: 400px;
+}
+.horizontal-axis-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+.vertical-axis-line{
+    margin-left: auto;
+    margin-right: auto;
+    width: 2px;
+    height: 40vh;
+    background-color: #919191;
+}
+.vertical-axis-container{
+    margin-bottom: -13px;
+}
+
+.horizontal-axis-container img{
+    height: 24px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#tuner-note-label{
+    margin-top: -10px;
+    color: #dddddd;
+    font-size: 60px;
+    font-weight: 800;
+}
+
+.tuner-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tuner-content-text, #frequency-label{
+    color: #919191;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+#frequency-label{
+    color: #74F398;
+    font-size: 22px;
 }
