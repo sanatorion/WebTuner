@@ -60,3 +60,27 @@ h2{
 .corner-nav-active{
     color: #dddddd;
 }
+
+#contact-text{
+    max-width: 60ch;
+}
+
+.link-container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    
+}
+
+a{
+    text-decoration: none;
+    color: #dddddd;
+
+    transition: all 0.3s ease-in-out;
+}
+
+a:hover{
+    color: #74F398;
+
+    transition: all 0.3s ease;
+}
