@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WebTuner</title>
     <link rel="stylesheet" href="assets/style/style.css">
+    <script src="js/tunings.js"></script>
+    <script src="js/app.js" type="module"></script>
 </head>
 <body>
     <header>
@@ -25,14 +27,32 @@
             </div>
         </div>
         
-        <span id="tuner-note-label">D</span>
+        <span id="tuner-note-label">-</span>
 
-        <div class="tuner-content">
-            <span class="tuner-content-text">FREQUENCY</span>
-            <span id="frequency-label">∙∙.∙ Hz</span>
+        <div style="display: flex; flex-direction: column; gap: 20px; padding-top: 10px;">
+            <div class="tuner-content">
+                <span class="tuner-content-text">FREQUENCY</span>
+                <span id="frequency-label">--.- Hz</span>
+            </div>
+
+            <div class="tuner-content">
+                <span class="tuner-content-text">TARGET</span>
+                <span id="target-frequency-label" style="color: #dddddd;">--.- Hz</span>
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="cent-container">
+        <div class="cent-canvas">
+            <canvas id="cent-trail"></canvas>
+            <div class="cent-coin">
+                <span id="cent-label" class="cent">-</span>
+                <span class="cent-arrow">▼</span>
+            </div>
         </div>
     </div>
-    
+
     <main>
         <div class="content-header">
             <button id="tuner-type-btn" onclick="window.location.href='services.html'">

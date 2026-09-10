@@ -1,8 +1,3 @@
-@font-face {
-    font-family: 'Inter';
-    src: url('fonts/Inter.ttf') format('truetype');
-}
-
 *, *::before, *::after, input, button { 
     font-family: 'Inter'
 }
@@ -147,7 +142,58 @@ a:hover{
     transition: all 0.2s linear;
 }
 
-.tuner-container{
+.cent-container, .cent-canvas{
+    position: absolute;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: top;
+    padding-top: 14px;
+}
+.cent-canvas{
+    position: relative;
+    height: 37vh;
+    width: 30vw;
+    min-width: 400px;
+}
+.cent-coin{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%); 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.05s ease-out; 
+}
+.cent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    font-weight: 700;
+    color: #dddddd;
+    background-color: #1d1d1d;
+    border: 2px solid;
+    border-radius: 50%;
+    border-color: #74F398;
+    width: 40px;
+    height: 40px;
+}
+.cent-arrow{
+    margin-top: -6px;
+    color: #74F398;
+}
+#cent-trail{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.tuner-container {
     position: absolute;
     width: 100%;
     display: flex;
@@ -206,16 +252,16 @@ a:hover{
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 5px;
 }
 
-.tuner-content-text, #frequency-label{
+.tuner-content-text, #frequency-label, #target-frequency-label{
     color: #919191;
     font-size: 14px;
     font-weight: 800;
 }
 
-#frequency-label{
+#frequency-label, #target-frequency-label{
     color: #74F398;
     font-size: 22px;
 }
