@@ -1,3 +1,12 @@
+@font-face {
+    font-family: 'Inter';
+    src: url('fonts/Inter.ttf') format('truetype');
+}
+
+*, *::before, *::after, input, button { 
+    font-family: 'Inter'
+}
+
 body{
     margin: 0;
     background-color: #1d1d1d;
@@ -10,19 +19,19 @@ header{
 }
 
 main{
-    margin-left: 26px;
-    margin-right: 26px;
+    margin: 26px;
     line-height: 0.5;
 }
 
-p{
+p, .link-title{
     line-height: 1.5;
+    font-weight: 500;
 }
 
 button{
     display: flex;
     background-color: #232323;
-    border: 2px solid #3e3e3e;
+    border: 3px solid #3e3e3e;
     border-radius: 50px;
     align-items: center;
     padding: 5px 15px;
@@ -32,7 +41,7 @@ button{
 }
 
 button:hover{
-    background-color: #3e3e3e;
+    border-color: #919191;
     transition: all 0.2s linear;
 }
 
@@ -44,6 +53,7 @@ button:hover{
 #tuner-type-label{
     color: #dddddd;
     font-size: 18px;
+    font-weight: 600;
 }
 
 #header-logo{
@@ -235,7 +245,8 @@ a:hover{
     border: 2px solid;
     border-color: #3e3e3e;
     text-align: center;
-    font-size: 28px;
+    align-content: center;
+    font-size: 24px;
     font-weight: 700;
     color: #919191;
     outline: none;
@@ -307,4 +318,56 @@ a:hover{
 .toggle-container:has(input:not(:checked)) .toggle-label {
    color: #dddddd;
    transition: all 0.2s linear;
+}
+
+.grid-section-title{
+    font-size: 22px;
+}
+
+.cards-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 350px));
+    justify-content: left;
+    gap: 30px;
+}
+.card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    background-color: #232323;
+    border: 2px solid;
+    border-color: #3e3e3e;
+    border-radius: 20px;
+    width: 330px;
+    height: 100px;
+    transition: all 0.2s linear;
+}
+.card-title{
+    color: #dddddd;
+    margin: 0px;
+}
+.card-note{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap:14px
+}
+.card-note-box{
+    font-size: 16px;
+    width: 32px;
+    height: 32px;
+}
+.card-note-box:hover{
+    border-color: #3e3e3e;
+    color: #919191;
+}
+
+.card:hover .card-note-box{
+    color: #dddddd;
+}
+.card:hover{
+    border-color: #919191;
 }
