@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WebTuner</title>
+    <link rel="icon" type="image/png" href="assets/img/icon.png">
     <link rel="stylesheet" href="assets/style/style.css">
+    <script src="js/tunings.js"></script>
+    <script src="js/app.js" type="module"></script>
 </head>
 <body>
     <header>
@@ -25,6 +28,16 @@
             </div>
         </div>
         
+        <div class="cent-container">
+            <div class="cent-canvas">
+                <canvas id="cent-trail"></canvas>
+                <div class="cent-coin">
+                    <span id="cent-label" class="cent">-</span>
+                    <span class="cent-arrow">▼</span>
+                </div>
+            </div>
+        </div>
+
         <span id="tuner-note-label">D</span>
 
         <div class="tuner-content">
@@ -32,42 +45,39 @@
                 <span class="tuner-content-text">FREQUENCY</span>
                 <span id="frequency-label">∙∙.∙ Hz</span>
             </div>
-           
 
             <div class="note-box-container">
                 <div class="note">
                     <button class="arrow-btn">▲</button>
-                    <input class="note-box" type="text" maxlength="2" value="E">
+                    <input class="note-box" type="text" maxlength="3" value="E">
                     <button class="arrow-btn">▼</button>
                 </div>
                 <div class="note">
                     <button class="arrow-btn">▲</button>
-                    <input class="note-box" type="text" maxlength="2" value="A">
+                    <input class="note-box" type="text" maxlength="3" value="A">
                     <button class="arrow-btn">▼</button>
                 </div>
                 <div class="note">
                     <button class="arrow-btn">▲</button>
-                    <input class="note-box" type="text" maxlength="2" value="D">
+                    <input class="note-box" type="text" maxlength="3" value="D">
                     <button class="arrow-btn">▼</button>
                 </div>
                 <div class="note">
                     <button class="arrow-btn">▲</button>
-                    <input class="note-box" type="text" maxlength="2" value="G">
+                    <input class="note-box" type="text" maxlength="3" value="G">
                     <button class="arrow-btn">▼</button>
                 </div>
                 <div class="note">
                     <button class="arrow-btn">▲</button>
-                    <input class="note-box" type="text" maxlength="2" value="B">
+                    <input class="note-box" type="text" maxlength="3" value="B">
                     <button class="arrow-btn">▼</button>
                 </div>
                 <div class="note">
                     <button class="arrow-btn">▲</button>
-                    <input class="note-box" type="text" maxlength="2" value="E">
+                    <input class="note-box" type="text" maxlength="3" value="E">
                     <button class="arrow-btn">▼</button>
                 </div>
-
             </div>
-
         </div>
     </div>
 
@@ -85,11 +95,12 @@
             <br>
             <br>
 
-            <label class="toggle-container">
+            <!--Unused auto toggle-->
+            <!-- <label class="toggle-container">
                 <span class="toggle-label">Auto</span>
                 <input type="checkbox" name="auto-toggle" id="auto-toggle" checked>
                 <span class="toggle-slider"></span>
-            </label>
+            </label> -->
 
 
         </div>

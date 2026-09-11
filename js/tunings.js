@@ -1,4 +1,16 @@
 // Reference dictionary of guitar tuning frequencies
+
+const TUNING_NAMES = {
+    standard: "Standard",
+    halfStepDown: "Half Step Down",
+    fullStepDown: "Full Step Down",
+    dropD: "Drop D",
+    dropCSharp: "Drop C#",
+    dropC: "Drop C",
+    custom: "Custom",
+    chromatic: "Chromatic"
+};
+
 const chromaticNotes = [
     // Octave 2
     { note: "C₂",  freq: 65.4 },
@@ -56,11 +68,62 @@ const chromaticNotes = [
     { note: "A#₅", freq: 932.3 },
     { note: "B₅",  freq: 987.8 }
 ];
-const standardTuning = [
-    { note: "E", octave: 2, freq: 82.4 },
-    { note: "A", octave: 2, freq: 110 },
-    { note: "D", octave: 3, freq: 146.8 },
-    { note: "G", octave: 3, freq: 196 },
-    { note: "B", octave: 3, freq: 246.9 },
-    { note: "E", octave: 4, freq: 329.6 }
-];
+
+const TUNINGS = {
+    standard: [
+        { note: "E₂", octave: 2, freq: 82.4 },
+        { note: "A₂", octave: 2, freq: 110 },
+        { note: "D₃", octave: 3, freq: 146.8 },
+        { note: "G₃", octave: 3, freq: 196 },
+        { note: "B₃", octave: 3, freq: 246.9 },
+        { note: "E₄", octave: 4, freq: 329.6 }
+    ],
+    halfStepDown: [
+        { note: "D#₂", octave: 2, freq: 77.8 },
+        { note: "G#₂", octave: 2, freq: 103.8 },
+        { note: "C#₃", octave: 3, freq: 138.6 },
+        { note: "F#₃", octave: 3, freq: 185 },
+        { note: "A#₃", octave: 3, freq: 233.1 },
+        { note: "D#₄", octave: 4, freq: 311.1 }
+    ],
+    fullStepDown: [
+        { note: "D₂", octave: 2, freq: 73.4 },
+        { note: "G₂", octave: 2, freq: 98 },
+        { note: "C₃", octave: 3, freq: 130.8 },
+        { note: "F₃", octave: 3, freq: 174.6 },
+        { note: "A₃", octave: 3, freq: 220 },
+        { note: "D₄", octave: 4, freq: 293.7 }
+    ],
+    dropD: [
+        { note: "D₂", octave: 2, freq: 73.4 },
+        { note: "A₂", octave: 2, freq: 110 },
+        { note: "D₃", octave: 3, freq: 146.8 },
+        { note: "G₃", octave: 3, freq: 196 },
+        { note: "B₃", octave: 3, freq: 246.9 },
+        { note: "E₄", octave: 4, freq: 329.6 }
+    ],
+    dropCSharp: [
+        { note: "C#₂", octave: 2, freq: 69.3 },
+        { note: "G#₂", octave: 2, freq: 103.8 },
+        { note: "C#₃", octave: 3, freq: 138.6 },
+        { note: "F#₃", octave: 3, freq: 185 },
+        { note: "A#₃", octave: 3, freq: 233.1 },
+        { note: "D#₄", octave: 4, freq: 311.1 }
+    ],
+    dropC: [
+        { note: "C₂", octave: 2, freq: 65.4 },
+        { note: "G₂", octave: 2, freq: 98 },
+        { note: "C₃", octave: 3, freq: 130.8 },
+        { note: "F₃", octave: 3, freq: 174.6 },
+        { note: "A₃", octave: 3, freq: 220 },
+        { note: "D₄", octave: 4, freq: 293.7 }
+    ],
+    custom: [
+        { note: "E₂", octave: 2, freq: 82.4 },
+        { note: "A₂", octave: 2, freq: 110 },
+        { note: "D₃", octave: 3, freq: 146.8 },
+        { note: "G₃", octave: 3, freq: 196 },
+        { note: "B₃", octave: 3, freq: 246.9 },
+        { note: "E₄", octave: 4, freq: 329.6 }
+    ]
+}

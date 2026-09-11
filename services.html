@@ -4,7 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WebTuner - Services</title>
+    <link rel="icon" type="image/png" href="assets/img/icon.png">
     <link rel="stylesheet" href="assets/style/style.css">
+    <script>
+        function selectTuning(tuningKey) {
+            sessionStorage.setItem("selectedTuning", tuningKey);
+            window.location.href = "tuned.html"; // Adjust to 'tuned.html' if needed
+        }
+    </script>
 </head>
 <body>
     <header>
@@ -21,73 +28,73 @@
             <h3 class="content-title">Select Tuning</h3>
         </div>
 
-        <div class="main-content">
+        <div class="main-content"">
             <h2 class="grid-section-title">Common Tunings</h2>
             <div class="cards-grid">
-                <div class="card">
-                    <h2 class="card-title">Standard</h2>
+                <div class="card" onclick="selectTuning('standard')">
+                    <h2 class="card-title" >Standard</h2>
                     <div class="card-note">
-                        <span class="note-box card-note-box">E</span>
-                        <span class="note-box card-note-box">A</span>
-                        <span class="note-box card-note-box">D</span>
-                        <span class="note-box card-note-box">G</span>
-                        <span class="note-box card-note-box">B</span>
-                        <span class="note-box card-note-box">E</span>
+                        <span class="note-box card-note-box">E₂</span>
+                        <span class="note-box card-note-box">A₂</span>
+                        <span class="note-box card-note-box">D₃</span>
+                        <span class="note-box card-note-box">G₃</span>
+                        <span class="note-box card-note-box">B₃</span>
+                        <span class="note-box card-note-box">E₄</span>
                     </div>
                 </div>
-                <div class="card">
+                <div class="card" onclick="selectTuning('halfStepDown')">
                     <h2 class="card-title">Half Step Down</h2>
                     <div class="card-note">
-                        <span class="note-box card-note-box">D#</span>
-                        <span class="note-box card-note-box">G#</span>
-                        <span class="note-box card-note-box">C#</span>
-                        <span class="note-box card-note-box">F#</span>
-                        <span class="note-box card-note-box">A#</span>
-                        <span class="note-box card-note-box">D#</span>
+                        <span class="note-box card-note-box">D#₂</span>
+                        <span class="note-box card-note-box">G#₂</span>
+                        <span class="note-box card-note-box">C#₃</span>
+                        <span class="note-box card-note-box">F#₃</span>
+                        <span class="note-box card-note-box">A#₃</span>
+                        <span class="note-box card-note-box">D#₄</span>
                     </div>
                 </div>
-                <div class="card">
+                <div class="card" onclick="selectTuning('fullStepDown')">
                     <h2 class="card-title">Full Step Down</h2>
                     <div class="card-note">
-                        <span class="note-box card-note-box">D</span>
-                        <span class="note-box card-note-box">G</span>
-                        <span class="note-box card-note-box">C</span>
-                        <span class="note-box card-note-box">F</span>
-                        <span class="note-box card-note-box">A</span>
-                        <span class="note-box card-note-box">D</span>
+                        <span class="note-box card-note-box">D₂</span>
+                        <span class="note-box card-note-box">G₂</span>
+                        <span class="note-box card-note-box">C₃</span>
+                        <span class="note-box card-note-box">F₃</span>
+                        <span class="note-box card-note-box">A₃</span>
+                        <span class="note-box card-note-box">D₄</span>
                     </div>
                 </div>
-                <div class="card">
+                <div class="card" onclick="selectTuning('dropD')">
                     <h2 class="card-title">Drop D</h2>
                     <div class="card-note">
-                        <span class="note-box card-note-box">D</span>
-                        <span class="note-box card-note-box">A</span>
-                        <span class="note-box card-note-box">D</span>
-                        <span class="note-box card-note-box">G</span>
-                        <span class="note-box card-note-box">B</span>
-                        <span class="note-box card-note-box">E</span>
+                        <span class="note-box card-note-box">D₂</span>
+                        <span class="note-box card-note-box">A₂</span>
+                        <span class="note-box card-note-box">D₃</span>
+                        <span class="note-box card-note-box">G₃</span>
+                        <span class="note-box card-note-box">B₃</span>
+                        <span class="note-box card-note-box">E₄</span>
                     </div>
                 </div>
-                <div class="card">
+                <div class="card" onclick="selectTuning('dropCSharp')">
                     <h2 class="card-title">Drop C#</h2>
                     <div class="card-note">
-                        <span class="note-box card-note-box">C#</span>
-                        <span class="note-box card-note-box">G#</span>
-                        <span class="note-box card-note-box">C#</span>
-                        <span class="note-box card-note-box">F#</span>
-                        <span class="note-box card-note-box">A#</span>
-                        <span class="note-box card-note-box">D#</span>
+                        <span class="note-box card-note-box">C#₂</span>
+                        <span class="note-box card-note-box">G#₂</span>
+                        <span class="note-box card-note-box">C#₃</span>
+                        <span class="note-box card-note-box">F#₃</span>
+                        <span class="note-box card-note-box">A#₃</span>
+                        <span class="note-box card-note-box">D#₄</span>
                     </div>
                 </div>
-                <div class="card">
+                <div class="card" onclick="selectTuning('dropC')">
                     <h2 class="card-title">Drop C</h2>
                     <div class="card-note">
-                        <span class="note-box card-note-box">C</span>
-                        <span class="note-box card-note-box">A</span>
-                        <span class="note-box card-note-box">D</span>
-                        <span class="note-box card-note-box">G</span>
-                        <span class="note-box card-note-box">B</span>
-                        <span class="note-box card-note-box">E</span>
+                        <span class="note-box card-note-box">C₂</span>
+                        <span class="note-box card-note-box">G₂</span>
+                        <span class="note-box card-note-box">C₃</span>
+                        <span class="note-box card-note-box">F₃</span>
+                        <span class="note-box card-note-box">A₃</span>
+                        <span class="note-box card-note-box">D₄</span>
                     </div>
                 </div>
             </div>
@@ -101,22 +108,6 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24">
                                 <path d="M0 0h24v24H0z" fill="none" />
                                 <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 12c1.33 0 2.659.442 3.401.738a.538.538 0 0 0 .727-.38l.722-3.609c.089-.442-.131-.885-.556-1.036A13 13 0 0 0 12 7c-1.939 0-3.46.418-4.294.713c-.425.15-.645.594-.556 1.036l.722 3.61a.538.538 0 0 0 .727.38C9.341 12.441 10.671 12 12 12m0 0l1-2M6 20h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2" />
-                            </svg>
-                        </span>
-                    </div>
-                </div>
-
-                <div class="card" onclick="window.location.href='tuned.html'">
-                    <h2 class="card-title">Custom Tuning</h2>
-                    <div class="card-note">
-                        <span class="note-box card-note-box">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 16 16">
-                                <path d="M0 0h16v16H0z" fill="none" />
-                                <g fill="currentColor">
-                                    <path d="M9 13c0 1.105-1.12 2-2.5 2S4 14.105 4 13s1.12-2 2.5-2s2.5.895 2.5 2" />
-                                    <path fill-rule="evenodd" d="M9 3v10H8V3z" />
-                                    <path d="M8 2.82a1 1 0 0 1 .804-.98l3-.6A1 1 0 0 1 13 2.22V4L8 5z" />
-                                </g>
                             </svg>
                         </span>
                     </div>

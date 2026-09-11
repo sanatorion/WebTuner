@@ -1,7 +1,68 @@
 import { PitchDetector } from "https://esm.sh/pitchy@4";
 
+const savedTuningKey = sessionStorage.getItem("selectedTuning") || "standard";
+let activeTuning = (savedTuningKey === "chromaticNotes") ? chromaticNotes : TUNINGS[savedTuningKey] || TUNINGS.standard;
+
+console.log(activeTuning);
+
+let holdDuration = 2000;
+let lastValidTime = 0;
+let lockUntilTime = 0;
+let lastOffset = 0;
+
 let pitchHistory = [];
 const maxHistoryLength = 40;
+
+const isPreset = savedTuningKey && savedTuningKey !== "chromatic" && savedTuningKey !== "custom";
+
+const noteInputs = document.querySelectorAll(".note-box");
+const arrowButtons = document.querySelectorAll(".arrow-btn");
+
+if (isPreset) {
+    arrowButtons.forEach(btn => btn.style.display = "none");
+
+    noteInputs.forEach((input, index) => {
+        input.readOnly = true;
+        if (activeTuning && activeTuning[index]) {
+            // Keep the raw note string with its subscript octave directly from TUNINGS
+            input.value = activeTuning[index].note;
+        }
+    });
+} else {
+    arrowButtons.forEach(btn => btn.style.display = "inline-block");
+
+    noteInputs.forEach((input) => {
+        input.readOnly = false;
+    });
+}
+
+const tunerTypeLabel = document.getElementById("tuner-type-label");
+if (tunerTypeLabel) {
+    tunerTypeLabel.textContent = TUNING_NAMES[savedTuningKey] || "Chromatic";
+}
+
+function updateActiveNoteHighlight(targetNote) {
+    if (!noteInputs.length) return;
+
+    if (!targetNote || targetNote === "-") {
+        noteInputs.forEach(input => {
+            input.style.borderColor = "";
+            input.style.setProperty("color", "#919191", "important");
+        });
+        return;
+    }
+
+    noteInputs.forEach(input => {
+        // Direct match includes the octave subscript (e.g., "D#₂" === "D#₂")
+        if (input.value.trim() === targetNote.trim()) {
+            input.style.borderColor = "#74F398";
+            input.style.setProperty("color", "#dddddd", "important");
+        } else {
+            input.style.borderColor = "";
+            input.style.setProperty("color", "#919191", "important");
+        }
+    });
+}
 
 function drawLiveTrail(currentOffset, isActive) {
     const canvas = document.getElementById('cent-trail');
@@ -48,7 +109,6 @@ function drawLiveTrail(currentOffset, isActive) {
 
         ctx.quadraticCurveTo(prevX, prevY, midX, midY);
     }
-
     ctx.stroke();
 }
 
@@ -73,11 +133,6 @@ function findClosestNote(micFreq, tuningArray) {
     };
 }
 
-let holdDuration = 2000;
-let lastValidTime = 0;
-let lockUntilTime = 0;
-let lastOffset = 0;
-
 function updatePitch(analyserNode, detector, input, sampleRate) {
   const now = Date.now();
 
@@ -93,10 +148,16 @@ function updatePitch(analyserNode, detector, input, sampleRate) {
   analyserNode.getFloatTimeDomainData(input);
   const [pitch, clarity] = detector.findPitch(input, sampleRate);
   const hz = Math.round(pitch * 10) / 10;
-  const closestNote = findClosestNote(hz, chromaticNotes);
+  const closestNote = findClosestNote(hz, activeTuning);
 
   const coin = document.querySelector('.cent-coin');
   const centText = document.querySelector('.cent');
+
+  const freqLabel = document.getElementById("frequency-label");
+  const tunerNoteLabel = document.getElementById("tuner-note-label");
+  const targetFreqLabel = document.getElementById("target-frequency-label");
+  const vertAxis = document.getElementsByClassName("vertical-axis-line")[0];
+  const horizAxis = document.getElementsByClassName("horizontal-axis-line")[0];
 
   let currentOffset = 0;
   let isActivePitch = false;
@@ -105,30 +166,38 @@ function updatePitch(analyserNode, detector, input, sampleRate) {
     lastValidTime = now;
     isActivePitch = true;
 
-    document.getElementById("frequency-label").textContent = `${hz} Hz`;
-    document.getElementById("tuner-note-label").textContent = `${closestNote.targetNote}`;
-    document.getElementById("target-frequency-label").textContent = `${closestNote.targetFreq} Hz`;
+    if (freqLabel) freqLabel.textContent = `${hz} Hz`;
+    if (tunerNoteLabel) tunerNoteLabel.textContent = `${closestNote.targetNote}`;
+    if (targetFreqLabel) targetFreqLabel.textContent = `${closestNote.targetFreq} Hz`;
+
+    // Highlight the note box corresponding to closestNote
+    updateActiveNoteHighlight(closestNote.targetNote);
 
     const cents = closestNote.cents;
     const maxCents = 50;
     const clampedCents = Math.max(-maxCents, Math.min(maxCents, cents));
     
-    const canvasWidth = document.querySelector('.cent-canvas').clientWidth;
-    const maxPixelShift = (canvasWidth / 2) - 30; 
-    currentOffset = (clampedCents / maxCents) * maxPixelShift;
+    const centCanvas = document.querySelector('.cent-canvas');
+    if (centCanvas) {
+        const canvasWidth = centCanvas.clientWidth;
+        const maxPixelShift = (canvasWidth / 2) - 30; 
+        currentOffset = (clampedCents / maxCents) * maxPixelShift;
+    }
 
     lastOffset = currentOffset;
 
     if (coin) {
       coin.style.transform = `translateX(calc(-50% + ${currentOffset}px))`;
 
-      if (cents === 0){
-        centText.style.backgroundColor = "#74F398";
-        lockUntilTime = now + 800;
-      } else if (cents >= -8 && cents <= 8){
-        centText.style.backgroundColor = "#2D2F2C";
-      } else {
-        centText.style.backgroundColor = "#1d1d1d";
+      if (centText) {
+        if (cents === 0){
+          centText.style.backgroundColor = "#74F398";
+          lockUntilTime = now + 800;
+        } else if (cents >= -8 && cents <= 8){
+          centText.style.backgroundColor = "#2D2F2C";
+        } else {
+          centText.style.backgroundColor = "#1d1d1d";
+        }
       }
     }
 
@@ -137,8 +206,8 @@ function updatePitch(analyserNode, detector, input, sampleRate) {
         centText.textContent = "✓";
         centText.style.color = "#1d1d1d";
         centText.style.fontSize = "30px";
-        document.getElementsByClassName("vertical-axis-line")[0].style.backgroundColor = "#74F398";
-        document.getElementsByClassName("horizontal-axis-line")[0].style.backgroundColor = "#74F398";
+        if (vertAxis) vertAxis.style.backgroundColor = "#74F398";
+        if (horizAxis) horizAxis.style.backgroundColor = "#74F398";
       } else {
         centText.textContent = `${cents > 0 ? '+' : ''}${cents}`;
         centText.style.color = "#dddddd";
@@ -148,24 +217,26 @@ function updatePitch(analyserNode, detector, input, sampleRate) {
 
   } else {
     if (now - lastValidTime > holdDuration) {
-      centText.style.transition = "all 0.10s linear";
-      centText.style.backgroundColor = "#1d1d1d";
-      centText.style.color = "#dddddd";
-      centText.style.fontSize = "22px";
+      if (centText) {
+        centText.style.transition = "all 0.10s linear";
+        centText.style.backgroundColor = "#1d1d1d";
+        centText.style.color = "#dddddd";
+        centText.style.fontSize = "22px";
+        centText.textContent = `-`;
+      }
       
-      document.getElementsByClassName("vertical-axis-line")[0].style.backgroundColor = "#919191";
-      document.getElementsByClassName("horizontal-axis-line")[0].style.backgroundColor = "#919191";
+      if (vertAxis) vertAxis.style.backgroundColor = "#919191";
+      if (horizAxis) horizAxis.style.backgroundColor = "#919191";
       
-      document.getElementById("frequency-label").textContent = `--.- Hz`;
-      document.getElementById("target-frequency-label").textContent = `--.- Hz`;
-      document.getElementById("tuner-note-label").textContent = `-`;
+      if (freqLabel) freqLabel.textContent = `--.- Hz`;
+      if (targetFreqLabel) targetFreqLabel.textContent = `--.- Hz`;
+      if (tunerNoteLabel) tunerNoteLabel.textContent = `-`;
 
       if (coin) {
         coin.style.transform = `translateX(-50%)`;
       }
-      if (centText) {
-        centText.textContent = `-`;
-      }
+
+      updateActiveNoteHighlight("-");
 
       currentOffset = 0;
       lastOffset = 0;
@@ -194,8 +265,6 @@ navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
     detector.minVolumeDecibels = -10;
     const input = new Float32Array(detector.inputLength);
     updatePitch(analyserNode, detector, input, audioContext.sampleRate);
-
-
 })
 .catch((err) => {
     console.error("Microphone error:", err);
