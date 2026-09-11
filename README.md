@@ -1,6 +1,6 @@
 # WebTuner
 
-WebTuner is a lightweight, minimalist web utility designed for musicians who want a clean, visual, and distraction-free way to tune their instruments directly from their browser. It provides real-time, interactive pitch feedback without requiring any installation.
+WebTuner is a simple, minimalist web tool built for quick and distraction-free instrument tuning right in your browser. It uses your device's mic to give you real-time pitch feedback—no extra apps or installs needed, just open the page and tune up.
 
 ---
 
@@ -25,11 +25,13 @@ The audio pitch detection engine imports the pitchy module directly via an exter
 
 ## Getting Started
 
-1. **Clone or Download** the repository to your local machine.
-2. Open index.html or tuned.html in any modern web browser (Google Chrome, Firefox, Safari, Edge).
-3. Ensure you are **connected to the internet** so external libraries load properly.
-4. Allow microphone access when prompted by your browser.
-5. Pluck a string and start tuning!
+1. **Clone or Download** the project files to your local machine.
+2. **Run a local web server** (required because the app uses ES Modules):
+   - **VS Code**: Install the *Live Server* extension, right-click `index.html`, and select **Open with Live Server**.
+3. Open the provided local URL (e.g., `http://localhost:5500` or `http://localhost:8000`) in your browser.
+4. Make sure you are **connected to the internet** so external CDN scripts load properly.
+5. Allow microphone access when prompted.
+6. Pluck a string and start tuning!
 
 ---
 
